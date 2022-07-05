@@ -1,0 +1,171 @@
+# pV=nRT
+
+from tkinter import *
+
+
+def delete():
+    T_var.set("")
+    p_var.set("")
+    V_var.set("")
+    n_var.set("")
+    R_var.set("")
+    odpowiedz="Wprowadź dane ponownie"
+    odpowiedzokno.set(odpowiedz)
+
+
+def oblicz():
+    T=T_var.get()
+    p = p_var.get()
+    V = V_var.get()
+    n = n_var.get()
+    R= R_var.get()
+
+    if T =="" and( n==""or V=="" or p==""):
+        odpowiedz="Brakuje informacji"
+        odpowiedzokno.set(odpowiedz)
+    elif  V=="" and( n=="" or p==""):
+
+        odpowiedz = "Brakuje informacji"
+        odpowiedzokno.set(odpowiedz)
+    elif p == "" and (n == "" or T == "" or V == ""):
+        odpowiedz = "Brakuje informacji"
+        odpowiedzokno.set(odpowiedz)
+    elif n == "" and( V == "" or T == "" or p == ""):
+        odpowiedz = "Brakuje informacji"
+        odpowiedzokno.set(odpowiedz)
+    else:
+        if R == "":
+
+            if T == "":
+                p = int(p_var.get())
+                V = int(V_var.get())
+                n = int(n_var.get())
+                R = 8.3145
+                wynik = (p * V) / (n * 8.3145)
+                odpowiedz = str("Nie podałeś R, więc podstawiłem 8.3145 [J/mol*K]\nTemperatura wynosi: " + str(
+                    round(wynik, 4)) + "[K]")
+                odpowiedzokno.set(odpowiedz)
+
+            elif V == "":
+                p = int(p_var.get())
+                n = int(n_var.get())
+                T = int(T_var.get())
+                R = 8.3145
+                wynik = (n * R * T / p)
+                odpowiedz = str("Nie podałeś R, więc podstawiłem 8.3145 [J/mol*K]\nObjętość wynosi: " + str(
+                    round(wynik, 4)) + "[m3]")
+                odpowiedzokno.set(odpowiedz)
+            elif n == "":
+                p = int(p_var.get())
+                V = int(V_var.get())
+                T = int(T_var.get())
+                R = 8.3145
+                wynik = ((p * V) / (R * T))
+                odpowiedz = str("Nie podałeś R, więc podstawiłem 8.3145 [J/mol*K]\nLiczba moli wynosi: " + str(
+                    round(wynik, 4)) + "[mola]")
+                odpowiedzokno.set(odpowiedz)
+            elif p == "":
+                V = int(V_var.get())
+                n = int(n_var.get())
+                T = int(T_var.get())
+                R = 8.3145
+                wynik = (n * R * T / V)
+                odpowiedz = str("Nie podałeś R, więc podstawiłem 8.3145 [J/mol*K]\nCiśnienie wynosi: " + str(
+                    round(wynik, 4)) + "[Pa]")
+                odpowiedzokno.set(odpowiedz)
+        else:
+
+            if T == "":
+                p = int(p_var.get())
+                V = int(V_var.get())
+                n = int(n_var.get())
+                R = int(R_var.get())
+                wynik = (p * V) / (n * R)
+                odpowiedz = str("Temperatura wynosi: " + str(round(wynik, 4)) + "[K]")
+                odpowiedzokno.set(odpowiedz)
+            elif V == "":
+                p = int(p_var.get())
+                n = int(n_var.get())
+                T = int(T_var.get())
+                R = int(R_var.get())
+                wynik = (n * R * T / p)
+                odpowiedz = str("Objętość wynosi: " + str(round(wynik, 4)) + "[m3]")
+                odpowiedzokno.set(odpowiedz)
+            elif n == "":
+                p = int(p_var.get())
+                V = int(V_var.get())
+                T = int(T_var.get())
+                R = int(R_var.get())
+                wynik = ((p * V) / (R * T))
+                odpowiedz = str("Liczba moli wynosi: "+ str(round(wynik, 4))+ "[mola]")
+                odpowiedzokno.set(odpowiedz)
+            elif p == "":
+                V = int(V_var.get())
+                n = int(n_var.get())
+                T = int(T_var.get())
+                R = int(R_var.get())
+                wynik = (n * R * T / V)
+                odpowiedz = str("Ciśnienie wynosi: " + str(round(wynik, 4)) + "[Pa]")
+                odpowiedzokno.set(odpowiedz)
+window=Tk()
+window.title("Równanie Clapeyrona by Oktawiusz Raczyński")
+window.geometry("700x290")
+p_var=StringVar()
+T_var=StringVar()
+V_var=StringVar()
+n_var=StringVar()
+R_var=StringVar()
+odpowiedzokno=StringVar()
+
+frame=Frame(window)
+frame.pack()
+labeltop=Label(frame,text="pV=nRT \n Opis: \t \t   \t\t\t\t\t  \n Powyższy kalkulator wykorzystuje Prawo Gazu Idealnego, \t \n nazywanego Równaniemem Clapeyrona.\t\t\t ",
+               font=("Calibri",10),bg="light blue",height=5)
+labeltop.grid(row=8,column=1)
+
+
+label=Label(frame,text="Zmienne: ",bg="white",width=20)
+label.grid(row=0,column=0)
+
+label1=Label(frame,text="Wprowadzne wartości: ",bg="white",width=20)
+label1.grid(row=0,column=1)
+
+label2=Label(frame,text='Jednostki: ',bg="white",width=20)
+label2.grid(row=0,column=2)
+
+labelp=Label(frame,text="p",bg="yellow",width=10)
+labelp.grid(row=1,column=0)
+entryp=Entry(frame,textvariable=p_var).grid(row=1,column=1)
+Label(frame,text="[Pa]",bg="yellow",width=10).grid(row=1,column=2)
+labelV=Label(frame,text="V",bg="yellow",width=10)
+labelV.grid(row=2,column=0)
+entryV=Entry(frame,textvariable=V_var).grid(row=2,column=1)
+Label(frame,text="[m3]",bg="yellow",width=10).grid(row=2,column=2)
+labeln=Label(frame,text="n",bg="yellow",width=10)
+labeln.grid(row=3,column=0)
+entryn=Entry(frame,textvariable=n_var).grid(row=3,column=1)
+Label(frame,text="[mola/i]",bg="yellow",width=10).grid(row=3,column=2)
+labelR=Label(frame,text="R",bg="yellow",width=10)
+labelR.grid(row=4,column=0)
+entryR=Entry(frame,textvariable=R_var).grid(row=4,column=1)
+Label(frame,text="[(Pa*m3)/mol*K]",font=("Arial",8),bg="yellow",width=12).grid(row=4,column=2)
+labelT=Label(frame,text="T",bg="yellow",width=10)
+labelT.grid(row=5,column=0)
+entryT=Entry(frame,textvariable=T_var).grid(row=5,column=1,columnspan=1)
+Label(frame,text="[K]",bg="yellow",width=10).grid(row=5,column=2)
+bottomoblicz=Button(frame,text="Oblicz",bg="pink",width=10,command=oblicz)
+bottomoblicz.grid(row=7, column=2,)
+bottomwyczyść=Button(frame,text="Wyczyść",bg="pink",width=10,command=delete)
+bottomwyczyść.grid(row=8, column=2)
+labelwynik=Label(frame,textvariable=odpowiedzokno,bg="light yellow", fg="brown",width=50,height=5)
+labelwynik.grid(row=7,column=0,columnspan=3)
+
+
+
+
+
+
+
+
+
+window.mainloop()
